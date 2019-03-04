@@ -88,26 +88,21 @@ class AirdropService {
         let success = {
           address,
           balance,
-          tx
-        }
-        fs.appendFileSync('addresses.js', {
-          success
-        })
-        return {
-          address,
-          balance,
           success: true,
           tx
         }
+        fs.appendFileSync('airdrop.js', success)
+        return success;
       } catch (error) {
         console.error(`Error in airdropToAddressArray at address ${address}`)
-        fs.appendFileSync('addresses.js', addressArray)
-        return {
+        let failed = {
           address,
           balance,
           success: false,
           tx: null
         }
+        fs.appendFileSync('airdrop.js', failed)
+        return failed;
       }
     }
   }
